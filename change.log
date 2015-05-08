@@ -1,0 +1,72 @@
+# Version info for python script mensaman.py
+#
+# starting with version: 0.2.3
+
+changes in version 0.3.2:
+- bugfix:
+  alias mathing was casing an error because it could
+  return an list or an integer
+  both cases are now treated separatly and should no
+  longer cause any problems - thanks to Alex for finding the bug
+
+changes in version 0.3.1:
+- alias matching was implemented
+  when an argument of list ['week','woche'] is given
+  the whole week will be printed
+   Internally week is first translated into a list of 
+  tht defined days of the week and. this list is
+  passed to a function to extract the corresponding date offsets
+
+- bugfix:
+  while sorting, negative date offsets were appended behind the highest
+  positiv ones. this was fixed using the *.sort() method of a list
+
+
+changes in version 0.3.0:
+- html file will no longer be automatically removed after the program ends
+- timeout for downloading file was implementet
+- new check in the beginning introduced
+    + check if html file exists and is up to date
+    + if not, new html file will be downloaded
+    
+    + significant improvement in time and download volume
+- new command line arguments are introduced
+    + --help, --extra, --graphics
+- --help prints a manual page how to use the mensaman
+- --extra prints extra information reguarding the food and its cooking
+- --graphics will display ascii art depending on special attributes of each meal
+
+    
+- bugfix:
+    + unknown command line args lead the program to display the menu
+      of the day before the current date, because the according function
+      returned -1 instead of 0, as it was intended to
+
+
+changes in version 0.2.4:
+- menu layout changed after reopening of the mensa after renovation
+  + everyday now consists out of 4 columns
+	Fleisch/Fisch
+	Vegetarisch/Vegan
+	Eintopf
+	Aktion
+- replacement for '&euro;' by 'Euro' has been implemented
+- if there are any html elements in '<>' brackets within the menu
+  description they are now removed
+- 5s timeout is introduced during download time. if the download doesnt finish
+  before the timeout, an information will be displayed and the program is
+  going to end
+
+changes in version 0.2.3:
+- integrated correct decoding for western encoding type ISO-8859-1
+- integrated support for command line arguments
+  + echo argument will be interpreted as requested day
+    possible requests are
+    mensaman.py 0	 	- equals to mensaman.py without arugments
+                     	   	  will print todays menu
+    mensaman.py -1		- will print the menu from yesterday
+    mensaman.py +1		- will print the menu from tomorrow
+    mensaman.py +/-n		- will print the menu +/- n days from today
+    mensaman.py [option]	- with option = [yesterday, heute, morgen, übermorgen, ... ]
+    mensaman.py [day of week]	- will print the menu of the day of the current week
+
