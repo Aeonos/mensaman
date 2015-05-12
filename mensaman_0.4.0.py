@@ -204,6 +204,7 @@ def PrintDateMenu(content, today, options):
           description = re.sub('ABCD','- und', description,0)
 
           description = description.strip()
+          description = description.replace('  ',' ')
           if (description != "- * - * - *"  and description != "Heute nicht im Angebot!"):
             print ''
             print menus[j],':'
