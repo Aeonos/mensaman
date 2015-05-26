@@ -2,6 +2,38 @@
 #
 # starting with version: 0.2.3
 
+changes in version 0.5.0:
+- graphical user interface was added
+   using zenity and kdialog two guis were added
+   first gui lets the user specify which days should
+   be displayed. the gui preselects the current date
+   if it is part of the current week.
+   after preparing the selected days, the original
+   mensaman.py script is called and its output is
+   piped to be stored.
+   Another window is than used to display the gather
+   information
+- encoding was added to output
+   text was only decoded using ISO-8859-1 definition
+   this result in a problem, when pipeing the output
+   to applictions not capable of the required encoding
+   feature.
+   therefore after decoding, the text is now encoded
+   again using utf-8
+- nameing system changed
+   because of using github, there will no longer be a
+   mensaman_X.X.X.py file. instead there is only one
+   executable python file. therefore the system link is
+   also removed and the main executable has changed
+   to the same name as the previous link, so that
+   all previously set commands to that link are still going
+   to work with the new naming convetion
+- new command line argument '--version'
+   prints program name and current version, than exits with return 0
+- help information modified
+   new command descriptions were added
+   version information is now display alongside the other help text
+
 changes in version 0.4.0:
 - mensaman is now aviable in github
 - new command line argument '--git' was added
