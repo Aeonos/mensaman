@@ -1,11 +1,17 @@
 #!/bin/bash
 
-MENSA="mensaman.py"
+MENSA="mensaman_main.py"
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 ZENITY=`which zenity`
 HAS_ZENITY=1
 KDIALOG=`which kdialog`
 HAS_KDIALOG=1
 REQUEST=""
+
+# correct script path
+MENSA="$SCRIPT_DIR/$MENSA"
+
+
 
 function setup_environment {
   if [[ "$ZENITY" == "" ]]; then
@@ -19,7 +25,8 @@ function setup_environment {
   if [[ "$HAS_ZANITY" == 0 && "$HAS_KDIALOG" == 0 ]]; then
     echo "warning - none of the required dialog resources where found on your system"
     echo "to use this script, you need to install zentiy or kdialog"
-    echo "exiting program"
+    echo "calling default script"
+    python "$MENSA" "$@"
     exit
   fi
 }
@@ -76,14 +83,18 @@ else
   fi
 fi
 
+
 # fetch information from website
 TEXTOUT=`python $MENSA $DAYS`
 
+
 # display results
 if [[ "$HAS_ZENITY" -eq 1 ]]; then
-  echo "$TEXTOUT" | $ZENITY --text-info --width 580 --height 500 2>/dev/null
+  echo "$TEXTOUT" | $ZENITY --text-info --title="Universität Siegen ENC Mensa Menü" --width 580 --height 500 2>/dev/null
 else
   if [[ "$HAS_KDIALOG" -eq 1 ]]; then
     echo "$TEXTOUT" > tmp.txt | $KDIALOG --textbox tmp.txt 580 500 --title "Universität Siegen ENC Mensa Menü" 2>/dev/null; rm tmp.txt
   fi
 fi
+
+
